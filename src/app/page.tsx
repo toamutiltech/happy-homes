@@ -11,7 +11,7 @@ export default function HomePage() {
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-100 to-blue-300 text-gray-900">
+    <div className="min-h-screen bg-gradient-to-r text-gray-900">
       {/* Navbar */}
       <nav className="bg-white shadow-md fixed w-full z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -79,10 +79,32 @@ export default function HomePage() {
             transition={{ duration: 0.5 }}
             className="p-10"
           >
-            <h2 className="text-4xl font-bold text-blue-600">🏡 Welcome to Happy Homes</h2>
-            <p className="mt-4 text-lg text-gray-700">
-              Your dream home is just a click away. Explore our listings and find the perfect place for you.
-            </p>
+            <div className="relative w-full h-screen bg-cover bg-center" style={{ backgroundImage: "url('/hero-image.jpg')" }}>
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white p-6">
+          <motion.h2 className="text-5xl font-bold" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            Light House NY
+          </motion.h2>
+          <p className="mt-4 text-lg">3 Bed • 2 Bath • 2200 Sq Ft</p>
+          <p className="text-2xl font-bold mt-2">$3,272</p>
+          <motion.button className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg text-lg font-semibold" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            View Property
+          </motion.button>
+        </div>
+      </div>
+
+      {/* Featured Properties */}
+      <section className="py-12 text-center">
+        <h2 className="text-3xl font-bold text-gray-800">Display Latest & Featured Properties</h2>
+        <div className="mt-6 grid md:grid-cols-3 gap-6 px-6">
+          {["Apartment", "Office", "Classic Home"].map((type) => (
+            <motion.div key={type} className="bg-white shadow-lg p-4 rounded-lg" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+              <img src={`/property-${type.toLowerCase()}.jpg`} alt={type} className="w-full h-48 object-cover rounded-t-lg" />
+              <h3 className="text-xl font-semibold mt-2">${type}</h3>
+              <p className="text-gray-600">2 Bedroom • 2 Bathroom • 1500 Sq Ft</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
             <motion.button
               className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg text-lg font-semibold"
               whileHover={{ scale: 1.1 }}
@@ -134,7 +156,10 @@ export default function HomePage() {
             </motion.button>
           </motion.div>
         )}
-      </div>
+        <footer className="bg-gray-800 text-white py-6 mt-12 text-center">
+        <p>© 2025 Happy Homes. All Rights Reserved.</p>
+      </footer>
+    </div>
     </div>
   );
 }
