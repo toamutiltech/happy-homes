@@ -42,10 +42,10 @@ const agents = [
 ];
 
 const propertyTypes = [
-  { name: "Home & Appartment", icon: "/icon-home.png" },
-  { name: "Vila", icon: "/icon-vila.png" },
-  { name: "Studio", icon: "/icon-studio.png" },
-  { name: "Office", icon: "/icon-office.png" },
+  { name: "Home & Appartment", icon: "/icons8-home-128.png" },
+  { name: "Vila", icon: "/icons8-home-400.png" },
+  { name: "Studio", icon: "/studio_4783008.png" },
+  { name: "Office", icon: "/workspace_1599910.png" },
 ];
 
 const services = [
@@ -238,6 +238,40 @@ export default function HomePage() {
       </div>
     </section>
 
+    <section className="text-center my-12">
+        <h2 className="text-3xl font-bold">Properties for Sale</h2>
+        <p className="text-gray-600">You can get one of our properties with just one click</p>
+
+        <div className="relative mt-6 w-full overflow-hidden">
+          <div className="flex items-center justify-center space-x-4">
+            <button onClick={prevSlide} className="text-gray-500 hover:text-blue-600">
+              <FaArrowLeft size={24} />
+            </button>
+
+            <motion.div
+              key={index}
+              className="flex space-x-6 overflow-hidden"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              {lists.slice(index, index + 3).map((list, i) => (
+                <div key={i} className="bg-white shadow-lg p-4 rounded-lg">
+                 <img src={list.img} alt={list.type} className="w-full h-48 object-cover rounded-t-lg" />
+    <h3 className="text-xl font-semibold mt-2">{list.type}</h3>
+    <p className="text-gray-600">{list.details}</p>
+    <p className="text-blue-600 font-bold mt-1">{list.price}</p>
+                </div>
+              ))}
+            </motion.div>
+
+            <button onClick={nextSlide} className="text-gray-500 hover:text-blue-600">
+              <FaArrowRight size={24} />
+            </button>
+          </div>
+        </div>
+      </section>
+
 
     <div className="w-full">
       {/* Explore Property Types */}
@@ -301,11 +335,11 @@ export default function HomePage() {
           <h2 className="text-2xl font-bold">Subscribe Newsletter</h2>
           <p className="mt-2">Get started by choosing from one of our pre-built page templates to showcase your properties</p>
           <div className="mt-4 flex">
-            <input type="email" placeholder="Enter your email" className="px-4 py-2 rounded-l-lg text-black w-64" />
+            <input type="email" placeholder="Enter your email" className="px-4 py-2 rounded-lg text-white bg-transparent w-64 border border-white focus:border-gray-300 focus:ring-2 focus:ring-white" />
             <button className="px-6 py-2 bg-blue-600 rounded-r-lg">Subscribe</button>
           </div>
         </div>
-        <img src="/luxury-house.jpg" alt="Luxury House" className="w-80 rounded-lg mt-4 md:mt-0" />
+        <img src="/hero-6.jpg" alt="Luxury House" className="w-80 rounded-lg mt-4 md:mt-0" />
       </section>
     </div>
     
