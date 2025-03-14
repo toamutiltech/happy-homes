@@ -407,7 +407,7 @@ export default function HomePage() {
             </motion.button>
           </motion.div>
         )}
-<footer className="bg-white py-10 ">
+<footer className="bg-gray-300 text-white py-6">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand Section */}
         <div>
