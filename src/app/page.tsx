@@ -98,7 +98,11 @@ export default function HomePage() {
       {/* Navbar */}
       <nav className="bg-white shadow-md fixed w-full z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-3xl font-extrabold text-blue-600">Happy Homes</h1>
+        <div className="flex items-center space-x-2">
+            <img src="/icons8-home-128.png" alt="Happy Homes" className="h-8" />
+            <h1 className="text-3xl font-extrabold text-blue-600">Happy Homes</h1>
+          </div>
+       
 
           {/* Desktop Nav */}
           <div className="hidden md:flex space-x-6">
@@ -403,10 +407,64 @@ export default function HomePage() {
             </motion.button>
           </motion.div>
         )}
+<footer className="bg-white py-10 ">
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* Brand Section */}
+        <div>
+          <div className="flex items-center space-x-2">
+            <img src="/icons8-home-128.png" alt="Konato" className="h-8" />
+            <h2 className="text-2xl font-semibold text-gray-900">Happy Homes</h2>
+          </div>
+          <p className="text-gray-500 mt-2">
+            Duis aute irure dolor inasfa reprehenderit in voluptate velit esse cillum
+          </p>
+          <div className="flex space-x-4 mt-4">
+            <a href="#" className="text-gray-600 text-xl"><i className="fab fa-instagram"></i></a>
+            <a href="#" className="text-gray-600 text-xl"><i className="fab fa-facebook"></i></a>
+            <a href="#" className="text-gray-600 text-xl"><i className="fab fa-linkedin"></i></a>
+            <a href="#" className="text-gray-600 text-xl"><i className="fab fa-youtube"></i></a>
+          </div>
+        </div>
 
-        <footer className="bg-gray-800 text-white py-6 mt-12 text-center">
-          <p>© 2025 Happy Homes. All Rights Reserved.</p>
-        </footer>
+        {/* Navigation */}
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900">Navigation</h3>
+          <ul className="mt-3 space-y-2 text-gray-600">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        {/* Services */}
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900">Services</h3>
+          <ul className="mt-3 space-y-2 text-gray-600">
+            <li>Drone Mapping</li>
+            <li>Real Estate</li>
+            <li>Commercial</li>
+            <li>Construction</li>
+          </ul>
+        </div>
+
+        {/* Contact */}
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900">Contact Us</h3>
+          <p className="text-gray-600 mt-3">Drone Mapping</p>
+          <a href="mailto:contact@carwash.com" className="text-blue-500 hover:underline">contact@carwash.com</a>
+          <p className="text-blue-700 font-bold text-lg mt-1">10 (87) 738-3940</p>
+        </div>
+      </div>
+
+      {/* Copyright */}
+      <div className="text-center text-gray-500 text-sm mt-8 border-t pt-4">
+        Copyright ©2025 Happy Homes. All rights reserved | This Site is made with 💙 by 
+        <a href="#" className="text-blue-500 hover:underline"> WebNCraft</a>
+      </div>
+    </footer>
+
       </div>
     </div>
   );
