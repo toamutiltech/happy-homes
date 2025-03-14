@@ -53,7 +53,7 @@ const services = [
     icon: <FaBuilding size={40} />,
     title: "Sell home or office",
     description:
-      "Selling Your Home or Office? Let's Make It Happen!",
+      "Selling Your Home or Office? Lets Make It Happen!",
   },
   {
     icon: <FaHome size={40} />,
@@ -65,7 +65,7 @@ const services = [
     icon: <FaCity size={40} />,
     title: "Find next",
     description:
-      "Ready for What's Next? Find Your Ideal Home or Office Now!",
+      "Ready for Whats Next? Find Your Ideal Home or Office Now!",
   },
 ];
 
@@ -416,7 +416,7 @@ export default function HomePage() {
             <h2 className="text-2xl font-semibold text-gray-900">Happy Homes</h2>
           </div>
           <p className="text-gray-500 mt-2">
-          Welcome to Happy Homes, where your journey to finding the perfect space begins. Whether you're looking for 
+          Welcome to Happy Homes, where your journey to finding the perfect space begins. Whether you are looking for 
           a cozy home to create lasting memories or a modern office to boost productivity, 
           Happy Homes is dedicated to making your dreams a reality. Discover blissful living and exceptional 
           comfort with our expertly curated properties. 
