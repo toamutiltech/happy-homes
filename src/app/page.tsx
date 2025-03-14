@@ -53,19 +53,19 @@ const services = [
     icon: <FaBuilding size={40} />,
     title: "Sell home or office",
     description:
-      "Get started by choosing from one of our pre-built page templates to showcase your properties.",
+      "Selling Your Home or Office? Let's Make It Happen!",
   },
   {
     icon: <FaHome size={40} />,
     title: "Rent home or office",
     description:
-      "Get started by choosing from one of our pre-built page templates to showcase your properties.",
+      "Ready to Move In? Rent Your Home or Office Now!",
   },
   {
     icon: <FaCity size={40} />,
     title: "Find next",
     description:
-      "Get started by choosing from one of our pre-built page templates to showcase your properties.",
+      "Ready for What's Next? Find Your Ideal Home or Office Now!",
   },
 ];
 
@@ -283,7 +283,7 @@ export default function HomePage() {
         <div>
           <h2 className="text-3xl font-bold">Explore by Property Type</h2>
           <p className="text-gray-600 mt-2">
-            Get started by choosing from one of our pre-built page templates to showcase your properties
+          Discover Diverse Spaces, Explore by Property Type
           </p>
           <button className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg shadow-lg">
             View All Property
@@ -302,7 +302,7 @@ export default function HomePage() {
       {/* Our Agents Section */}
       <section className="text-center my-12">
         <h2 className="text-3xl font-bold">Our Agents</h2>
-        <p className="text-gray-600">Get started by choosing from one of our pre-built page templates to showcase your properties</p>
+        <p className="text-gray-600">Your Property Journey Starts Here; Connect with Our Agent</p>
 
         <div className="relative mt-6 w-full overflow-hidden">
           <div className="flex items-center justify-center space-x-4">
@@ -337,7 +337,7 @@ export default function HomePage() {
       <section className="flex flex-col md:flex-row items-center justify-between bg-blue-900 text-white p-8">
         <div>
           <h2 className="text-2xl font-bold">Subscribe Newsletter</h2>
-          <p className="mt-2">Get started by choosing from one of our pre-built page templates to showcase your properties</p>
+          <p className="mt-2">Be in the Know, Subscribe to Our Newsletter</p>
           <div className="mt-4 flex">
             <input type="email" placeholder="Enter your email" className="px-4 py-2 rounded-lg text-white bg-transparent w-64 border border-white focus:border-gray-300 focus:ring-2 focus:ring-white" />
             <button className="px-6 py-2 bg-blue-600 rounded-r-lg">Subscribe</button>
@@ -416,7 +416,10 @@ export default function HomePage() {
             <h2 className="text-2xl font-semibold text-gray-900">Happy Homes</h2>
           </div>
           <p className="text-gray-500 mt-2">
-            Duis aute irure dolor inasfa reprehenderit in voluptate velit esse cillum
+          Welcome to Happy Homes, where your journey to finding the perfect space begins. Whether you're looking for 
+          a cozy home to create lasting memories or a modern office to boost productivity, 
+          Happy Homes is dedicated to making your dreams a reality. Discover blissful living and exceptional 
+          comfort with our expertly curated properties. 
           </p>
           <div className="flex space-x-4 mt-4">
             <a href="#" className="text-gray-600 text-xl"><i className="fab fa-instagram"></i></a>
@@ -453,7 +456,7 @@ export default function HomePage() {
         <div>
           <h3 className="text-lg font-semibold text-gray-900">Contact Us</h3>
           <p className="text-gray-600 mt-3">Drone Mapping</p>
-          <a href="mailto:contact@carwash.com" className="text-blue-500 hover:underline">contact@carwash.com</a>
+          <a href="mailto:contact@carwash.com" className="text-blue-500 hover:underline">contact@happyhomes.com</a>
           <p className="text-blue-700 font-bold text-lg mt-1">10 (87) 738-3940</p>
         </div>
       </div>
