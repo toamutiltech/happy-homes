@@ -450,25 +450,81 @@ export default function HomePage() {
                 )}
 
 {activeTab === "contact" && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="p-10"
+  <motion.div
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5 }}
+    className="p-10 bg-gray-900 rounded-lg shadow-lg text-white"
+  >
+    {/* Page Title */}
+    <h2 className="p-10 text-4xl font-bold mb-4">📞 Contact Us</h2>
+    <p className="text-lg mb-6">
+      Get in touch for more information about our properties.
+    </p>
+
+    {/* Contact Section */}
+    <div className="flex flex-col md:flex-row gap-8">
+      
+      {/* Contact Form */}
+      <div className="w-full md:w-1/2 bg-gray-800 p-6 rounded-lg shadow-md text-left">
+        <h3 className="text-2xl font-semibold mb-4">Send a Message</h3>
+        <form className="flex flex-col space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Full Name</label>
+            <input 
+              type="text" 
+              placeholder="Enter your name" 
+              className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-red-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Email</label>
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-red-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Message</label>
+            <textarea 
+              rows={4} 
+              placeholder="Enter your message..." 
+              className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-red-500"
+            />
+          </div>
+          <motion.button
+            type="submit"
+            className="px-6 py-3 bg-red-600 text-white rounded-lg shadow-lg text-lg font-semibold"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
-            <h2 className="p-10 text-4xl font-bold text-white">📞 Contact Us</h2>
-            <p className="mt-4 text-lg text-white">
-              Get in touch for more information about our properties.
-            </p>
-            <motion.button
-              className="mt-6 px-6 py-3 bg-red-600 text-white rounded-lg shadow-lg text-lg font-semibold"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              Get in Touch
-            </motion.button>
-          </motion.div>
-        )}
+            Send Message
+          </motion.button>
+        </form>
+      </div>
+
+      {/* Contact Info */}
+      <div className="w-full md:w-1/2 bg-gray-800 p-6 rounded-lg shadow-md flex flex-col space-y-4">
+        <h3 className="text-2xl font-semibold">Our Contact Details</h3>
+        <p className="text-gray-300">📍 Location: 2707 W Avenue 30, Los Angeles, CA 90065, USA</p>
+        <p className="text-gray-300">📞 Phone: +1 213 233-9452</p>
+        <p className="text-gray-300">📧 Email: contact@happyhomes.com</p>
+        
+        {/* Call-to-action button */}
+        <motion.button
+          className="mt-4 px-6 py-3 bg-red-600 text-white rounded-lg shadow-lg text-lg font-semibold"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          Get in Touch
+        </motion.button>
+      </div>
+
+    </div>
+  </motion.div>
+)}
+
 <footer className="bg-gray-300 text-white py-6">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand Section */}
@@ -519,7 +575,7 @@ export default function HomePage() {
           <h3 className="text-lg font-semibold text-gray-900">Contact Us</h3>
           <p className="text-gray-600 mt-3">Drone Mapping</p>
           <a href="mailto:contact@carwash.com" className="text-blue-500 hover:underline">contact@happyhomes.com</a>
-          <p className="text-blue-700 font-bold text-lg mt-1">10 (87) 738-3940</p>
+          <p className="text-blue-700 font-bold text-lg mt-1">1 213 233-9452</p>
         </div>
       </div>
 
