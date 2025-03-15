@@ -75,16 +75,45 @@ export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [index, setIndex] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [itemsPerSlide, setItemsPerSlide] = useState(3);
+
+    // Function to update number of items per slide
+    const updateItemsPerSlide = () => {
+      setItemsPerSlide(window.innerWidth < 768 ? 1 : 3);
+    };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
-    return () => clearInterval(interval);
+    if (typeof window !== "undefined") {
+      setWindowWidth(window.innerWidth);
+
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+      const updateItemsPerSlide = () => {
+        setItemsPerSlide(window.innerWidth < 768 ? 1 : 3);
+      };
+
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
   }, []);
 
+  // Auto-change image every 5 seconds
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const interval = setInterval(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, 5000);
+
+      return () => clearInterval(interval);
+    }
+  }, [images.length]);
+
+  // Toggle menu
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  // Slider functions
   const nextSlide = () => {
     setIndex((prev) => (prev + 1) % agents.length);
   };
@@ -158,49 +187,55 @@ export default function HomePage() {
       </nav>
 
       {/* Main Content */}
-      <div className="pt-24 px-6 text-center">
+      <div className="text-center">
         {activeTab === "home" && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="p-10"
+        
           >
-            <div className="relative w-full h-screen">
-              <Image
-                src={images[currentImageIndex].src}
-                alt="Hero Image"
-                layout="fill"
-                objectFit="cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-opacity-50 flex flex-col justify-center items-center text-center text-white p-6">
-                <motion.h2
-                  className="text-5xl font-bold"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {images[currentImageIndex].title}
-                </motion.h2>
-                <p className="mt-4 text-lg">{images[currentImageIndex].details}</p>
-                <p className="text-2xl font-bold mt-2">{images[currentImageIndex].price}</p>
-                <motion.button
-                  className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg text-lg font-semibold"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  View Property
-                </motion.button>
-              </div>
-            </div>
+<div className="relative w-full h-[90vh] md:h-screen">
+  <Image
+    src={images[currentImageIndex].src}
+    alt="Hero Image"
+    fill
+    className="w-full h-full object-cover"
+    priority
+  />
+  
+  {/* Overlay Content */}
+  <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white px-4 md:px-6 w-full">
+    <motion.h2
+      className="text-3xl md:text-5xl font-bold w-full"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      {images[currentImageIndex].title}
+    </motion.h2>
+    
+    <p className="mt-3 text-base md:text-lg w-full">{images[currentImageIndex].details}</p>
+    <p className="text-lg md:text-2xl font-bold mt-2 w-full">{images[currentImageIndex].price}</p>
+    
+    <motion.button
+      className="mt-5 px-5 py-2 md:px-6 md:py-3 bg-blue-600 text-white rounded-lg shadow-lg text-base md:text-lg font-semibold"
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+    >
+      View Property
+    </motion.button>
+  </div>
+</div>
+
+
           
 
    {/* Featured Properties */}
-      <section className="py-12 text-center">
-        <h2 className="text-3xl font-bold text-gray-800">Display Latest & Featured Properties</h2>
-        <p className="mt-6 text-gray-600">You Love what you see, get one for yourself</p>
-            <div className="mt-6 grid md:grid-cols-3 gap-6 px-6">
+      <section className=" text-center">
+        <h2 className="py-6 text-3xl font-bold text-white">Display Latest & Featured Properties</h2>
+        <p className="mt-6 text-white">You Love what you see, get one for yourself</p>
+            <div className="mt-6 grid md:grid-cols-3 gap-6 px-6 grid-cols-1 sm:grid-cols-2">
             {properties.map((property) => (
   <motion.div 
     key={property.type} 
@@ -243,73 +278,84 @@ export default function HomePage() {
     </section>
 
     <section className="text-center my-12">
-        <h2 className="text-3xl font-bold">Properties for Sale</h2>
-        <p className="text-gray-600">You can get one of our properties with just one click</p>
+  <h2 className="text-3xl font-bold text-white">Properties for Sale</h2>
+  <p className="text-white">You can get one of our properties with just one click</p>
 
-        <div className="relative mt-6 w-full overflow-hidden">
-          <div className="flex items-center justify-center space-x-4">
-            <button onClick={prevSlide} className="text-gray-500 hover:text-blue-600">
-              <FaArrowLeft size={24} />
-            </button>
+  <div className="relative mt-6 w-full overflow-hidden">
+    <div className="flex items-center justify-center space-x-4">
+      {/* Previous Slide Button */}
+      <button onClick={prevSlide} className="text-gray-500 hover:text-blue-600">
+        <FaArrowLeft size={24} />
+      </button>
 
-            <motion.div
-              key={index}
-              className="flex space-x-6 overflow-hidden"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              {lists.slice(index, index + 3).map((list, i) => (
-                <div key={i} className="bg-white shadow-lg p-4 rounded-lg">
-                 <img src={list.img} alt={list.type} className="w-full h-48 object-cover rounded-t-lg" />
-    <h3 className="text-xl font-semibold mt-2">{list.type}</h3>
-    <p className="text-gray-600">{list.details}</p>
-    <p className="text-blue-600 font-bold mt-1">{list.price}</p>
-                </div>
-              ))}
-            </motion.div>
+      {/* Motion div for sliding effect */}
+      <motion.div
+        key={index}
+        className="flex space-x-6 overflow-hidden"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        {/* Dynamically render properties based on screen size */}
+        {lists
+          .slice(index, index + (window.innerWidth < 768 ? 1 : 3)) // Show 1 item on small screens, 3 on larger
+          .map((list, i) => (
+            <div key={i} className="bg-white shadow-lg p-4 rounded-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+              <img src={list.img} alt={list.type} className="w-full h-48 object-cover rounded-t-lg" />
+              <h3 className="text-xl font-semibold mt-2">{list.type}</h3>
+              <p className="text-gray-600">{list.details}</p>
+              <p className="text-blue-600 font-bold mt-1">{list.price}</p>
+            </div>
+          ))}
+      </motion.div>
 
-            <button onClick={nextSlide} className="text-gray-500 hover:text-blue-600">
-              <FaArrowRight size={24} />
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* Next Slide Button */}
+      <button onClick={nextSlide} className="text-gray-500 hover:text-blue-600">
+        <FaArrowRight size={24} />
+      </button>
+    </div>
+  </div>
+</section>
+
 
 
     <div className="w-full">
       {/* Explore Property Types */}
-      <section className="mt-6 flex flex-col md:flex-row items-center justify-between bg-gray-100 p-8">
-        <div>
-          <h2 className="text-3xl font-bold">Explore by Property Type</h2>
-          <p className="text-gray-600 mt-2">
-          Discover Diverse Spaces, Explore by Property Type
-          </p>
-          <button className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg shadow-lg">
-            View All Property
-          </button>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white p-6 rounded-lg shadow-lg">
-          {propertyTypes.map((property, i) => (
-            <div key={i} className="flex flex-col items-center text-center">
-              <img src={property.icon} alt={property.name} className="w-12 h-12" />
-              <p className="mt-2 font-semibold">{property.name}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <section className="mt-6 flex flex-col lg:flex-row items-center justify-between bg-gray-100 p-6 sm:p-8">
+  {/* Left Section */}
+  <div className="text-center lg:text-left mb-6 lg:mb-0">
+    <h2 className="text-2xl sm:text-3xl font-bold">Explore by Property Type</h2>
+    <p className="text-gray-600 mt-2 max-w-md">
+      Discover Diverse Spaces, Explore by Property Type
+    </p>
+    <button className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition">
+      View All Property
+    </button>
+  </div>
+
+  {/* Right Section - Property Grid */}
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 bg-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-lg lg:max-w-xl">
+    {propertyTypes.map((property, i) => (
+      <div key={i} className="flex flex-col items-center text-center">
+        <img src={property.icon} alt={property.name} className="w-12 h-12 sm:w-14 sm:h-14" />
+        <p className="mt-2 font-semibold text-sm sm:text-base">{property.name}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
 
       {/* Our Agents Section */}
       <section className="text-center my-12">
-        <h2 className="text-3xl font-bold">Our Agents</h2>
-        <p className="text-gray-600">Your Property Journey Starts Here; Connect with Our Agent</p>
+        <h2 className="text-3xl font-bold text-white">Our Agents</h2>
+        <p className="text-white">Your Property Journey Starts Here; Connect with Our Agent</p>
 
         <div className="relative mt-6 w-full overflow-hidden">
           <div className="flex items-center justify-center space-x-4">
             <button onClick={prevSlide} className="text-gray-500 hover:text-blue-600">
               <FaArrowLeft size={24} />
             </button>
-
+        
             <motion.div
               key={index}
               className="flex space-x-6 overflow-hidden"
@@ -317,8 +363,10 @@ export default function HomePage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              {agents.slice(index, index + 3).map((agent, i) => (
-                <div key={i} className="bg-white shadow-lg p-4 rounded-lg">
+              {agents
+              .slice(index, index + (window.innerWidth < 768 ? 1 : 3))
+              .map((agent, i) => (
+                <div key={i} className="bg-white shadow-lg p-4 rounded-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
                   <img src={agent.img} alt={agent.name} className="w-40 h-40 object-cover rounded-full mx-auto" />
                   <h3 className="text-lg font-semibold mt-2">{agent.name}</h3>
                   <p className="text-gray-600">{agent.role}</p>
@@ -334,17 +382,31 @@ export default function HomePage() {
       </section>
 
       {/* Subscribe Newsletter */}
-      <section className="flex flex-col md:flex-row items-center justify-between bg-blue-900 text-white p-8">
-        <div>
-          <h2 className="text-2xl font-bold">Subscribe Newsletter</h2>
-          <p className="mt-2">Be in the Know, Subscribe to Our Newsletter</p>
-          <div className="mt-4 flex">
-            <input type="email" placeholder="Enter your email" className="px-4 py-2 rounded-lg text-white bg-transparent w-64 border border-white focus:border-gray-300 focus:ring-2 focus:ring-white" />
-            <button className="px-6 py-2 bg-blue-600 rounded-r-lg">Subscribe</button>
-          </div>
-        </div>
-        <img src="/hero-6.jpg" alt="Luxury House" className="w-80 rounded-lg mt-4 md:mt-0" />
-      </section>
+      <section className="flex flex-col md:flex-row items-center justify-between bg-blue-900 text-white p-6 md:p-8 space-y-6 md:space-y-0">
+  {/* Text & Input Section */}
+  <div className="text-center md:text-left w-full md:w-1/2">
+    <h2 className="text-2xl font-bold">Subscribe to Our Newsletter</h2>
+    <p className="mt-2">Be in the Know, Subscribe to Our Newsletter</p>
+
+    {/* Email Input & Button */}
+    <div className="mt-4 flex flex-col sm:flex-row items-center sm:items-stretch w-full max-w-lg">
+      <input 
+        type="email" 
+        placeholder="Enter your email" 
+        className="px-4 py-3 rounded-lg text-white bg-transparent w-full border border-white focus:border-gray-300 focus:ring-2 focus:ring-white placeholder-white sm:rounded-r-none"
+      />
+      <button className="w-full sm:w-auto mt-2 sm:mt-0 sm:ml-0 px-6 py-3 bg-blue-600 rounded-lg sm:rounded-l-none">
+        Subscribe
+      </button>
+    </div>
+  </div>
+
+  {/* Image Section */}
+  <div className="w-full md:w-1/2 flex justify-center">
+    <img src="/hero-6.jpg" alt="Luxury House" className="w-full max-w-xs sm:max-w-sm md:max-w-md rounded-lg" />
+  </div>
+</section>
+
     </div>
     
           </motion.div>  
@@ -357,11 +419,11 @@ export default function HomePage() {
                     transition={{ duration: 0.5 }}
                     className="p-10"
                   >
-                    <h2 className="text-4xl font-bold text-blue-600">🏗️ Our Listing</h2>
-                    <p className="mt-4 text-lg text-gray-700">
+                    <h2 className="p-10 text-4xl font-bold text-white">🏗️ Our Listing</h2>
+                    <p className="mt-4 text-lg text-white">
                       Discover our latest real estate developments and properties.
                     </p>
-                    <div className="mt-6 grid md:grid-cols-3 gap-6 px-6">
+                    <div className="mt-6 grid md:grid-cols-3 gap-6">
             {lists.map((list) => (
   <motion.div 
     key={list.type} 
@@ -394,8 +456,8 @@ export default function HomePage() {
             transition={{ duration: 0.5 }}
             className="p-10"
           >
-            <h2 className="text-4xl font-bold text-blue-600">📞 Contact Us</h2>
-            <p className="mt-4 text-lg text-gray-700">
+            <h2 className="p-10 text-4xl font-bold text-white">📞 Contact Us</h2>
+            <p className="mt-4 text-lg text-white">
               Get in touch for more information about our properties.
             </p>
             <motion.button
@@ -412,7 +474,7 @@ export default function HomePage() {
         {/* Brand Section */}
         <div>
           <div className="flex items-center space-x-2">
-            <img src="/icons8-home-128.png" alt="Konato" className="h-8" />
+            <img src="/icons8-home-128.png" alt="Happy Homes" className="h-8" />
             <h2 className="text-2xl font-semibold text-gray-900">Happy Homes</h2>
           </div>
           <p className="text-gray-500 mt-2">
