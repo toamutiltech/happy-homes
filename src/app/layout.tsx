@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: "Happy Homes Luxury Real Estate Consultation",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{

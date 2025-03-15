@@ -6,6 +6,8 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import { FaBuilding, FaHome, FaCity } from "react-icons/fa";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 const images = [
   { src: "/hero-1.jpg", title: "Light House NY", details: "3 Bed • 2 Bath • 2200 Sq Ft", price: "$3,272" },
@@ -76,8 +78,15 @@ export default function HomePage() {
   const [currentImageIndex] = useState(0);
   const [index, setIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
-
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+  }, []);
+  
   // Auto-change image every 5 seconds
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -100,6 +109,23 @@ export default function HomePage() {
 
   const prevSlide = () => {
     setIndex((prev) => (prev - 1 + agents.length) % agents.length);
+  };
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -505,8 +531,17 @@ export default function HomePage() {
   </motion.div>
 )}
 
+
 <footer className="bg-gray-300 text-white py-6">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <button
+      onClick={scrollToTop}
+      className={`fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 ${
+        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+      }`}
+    >
+      <FontAwesomeIcon icon={faArrowUp} size="lg" />
+    </button>
         {/* Brand Section */}
         <div>
           <div className="flex items-center space-x-2">
@@ -531,11 +566,9 @@ export default function HomePage() {
         <div>
           <h3 className="text-lg font-semibold text-gray-900">Navigation</h3>
           <ul className="mt-3 space-y-2 text-gray-600">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="">Home</a></li>           
+            <li><a href="">Listing</a></li>            
+            <li><a href="">Contact</a></li>
           </ul>
         </div>
 
@@ -564,6 +597,7 @@ export default function HomePage() {
         Copyright ©2025 Happy Homes. All rights reserved | This Site is made with 💙 by 
         <a href="#" className="text-blue-500 hover:underline"> WebNCraft</a>
       </div>
+
     </footer>
 
       </div>
