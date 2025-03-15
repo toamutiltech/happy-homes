@@ -75,18 +75,20 @@ export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [index, setIndex] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(0);
 
 
   // Auto-change image every 5 seconds
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const interval = setInterval(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 5000);
-
-      return () => clearInterval(interval);
+      setWindowWidth(window.innerWidth); // Get initial window width
+  
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize); // Listen for window resize
+  
+      return () => window.removeEventListener("resize", handleResize); // Cleanup
     }
-  }, [images.length]);
+  }, []);
 
   // Toggle menu
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -276,7 +278,7 @@ export default function HomePage() {
       >
         {/* Dynamically render properties based on screen size */}
         {lists
-          .slice(index, index + (window.innerWidth < 768 ? 1 : 3)) // Show 1 item on small screens, 3 on larger
+          .slice(index, index + (windowWidth < 768 ? 1 : 3)) // Show 1 item on small screens, 3 on larger
           .map((list, i) => (
             <div key={i} className="bg-white shadow-lg p-4 rounded-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
               <img src={list.img} alt={list.type} className="w-full h-48 object-cover rounded-t-lg" />
@@ -342,7 +344,7 @@ export default function HomePage() {
               transition={{ duration: 0.5 }}
             >
               {agents
-              .slice(index, index + (window.innerWidth < 768 ? 1 : 3))
+              .slice(index, index + (windowWidth < 768 ? 1 : 3))
               .map((agent, i) => (
                 <div key={i} className="bg-white shadow-lg p-4 rounded-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
                   <img src={agent.img} alt={agent.name} className="w-40 h-40 object-cover rounded-full mx-auto" />
