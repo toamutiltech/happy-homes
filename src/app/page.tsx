@@ -75,29 +75,7 @@ export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [index, setIndex] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(0);
-  const [itemsPerSlide, setItemsPerSlide] = useState(3);
 
-    // Function to update number of items per slide
-    const updateItemsPerSlide = () => {
-      setItemsPerSlide(window.innerWidth < 768 ? 1 : 3);
-    };
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setWindowWidth(window.innerWidth);
-
-      const handleResize = () => {
-        setWindowWidth(window.innerWidth);
-      };
-      const updateItemsPerSlide = () => {
-        setItemsPerSlide(window.innerWidth < 768 ? 1 : 3);
-      };
-
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }
-  }, []);
 
   // Auto-change image every 5 seconds
   useEffect(() => {
