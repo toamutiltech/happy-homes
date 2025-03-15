@@ -73,7 +73,7 @@ const services = [
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex] = useState(0);
   const [index, setIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
 
